@@ -8,7 +8,8 @@ Versioned collection of global rules and modular skills for Data Science and cod
 ds-agent-kit/
 ├── .agent/
 │   ├── rules/
-│   │   └── ds-standards.md
+│   │   ├── ds-standards.md
+│   │   └── rtk-token-hygiene.md
 │   └── skills/
 │       ├── data-exploration-analysis/
 │       │   ├── SKILL.md
@@ -25,6 +26,7 @@ ds-agent-kit/
 │               └── report-template.md
 ├── .gitignore
 ├── CHANGELOG.md
+├── LICENSE
 ├── README.md
 ├── VERSION
 └── install.ps1
@@ -32,11 +34,13 @@ ds-agent-kit/
 
 ## Included Rules & Skills
 
-### Global Rule: `ds-standards.md`
-Defines baseline Data Science and Python engineering standards applied across projects:
-- **Language Policy:** All code comments, docstrings, Markdown cells, chart labels, and analytical reports in English.
-- **Python & Modularity:** PEP 8, 120-character max line length, `uv` for environment management, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
-- **Data & Context Hygiene:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep `stdout` compact (`.head(3)`, never dumping raw tables).
+### Global Rules
+
+- **`ds-standards.md`** — Baseline Data Science and Python engineering standards applied across projects:
+  - **Language Policy:** All code comments, docstrings, Markdown cells, chart labels, and analytical reports in English.
+  - **Python & Modularity:** PEP 8, 120-character max line length, `uv` for environment management, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
+  - **Data & Context Hygiene:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep `stdout` compact (`.head(3)`, never dumping raw tables).
+- **`rtk-token-hygiene.md`** — Mandates prefixing supported CLI commands (`git`, `pytest`, `ruff`, `ls`, `grep`, etc.) with `rtk` (Rust Token Killer) to compress terminal output by 60–90%, with explicit raw-output exceptions and graceful fallback when `rtk` is unavailable.
 
 ### Skills
 
@@ -64,10 +68,12 @@ $AgyConfig = Join-Path $env:USERPROFILE ".gemini\config"
 New-Item -ItemType Directory -Path (Join-Path $AgyConfig "rules")  -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $AgyConfig "skills") -Force | Out-Null
 
-# Symlink global rule
-New-Item -ItemType SymbolicLink `
-  -Path   (Join-Path $AgyConfig "rules\ds-standards.md") `
-  -Target (Join-Path $KitRoot ".agent\rules\ds-standards.md")
+# Symlink all global rules
+Get-ChildItem -Path (Join-Path $KitRoot ".agent\rules") -Filter "*.md" | ForEach-Object {
+    New-Item -ItemType SymbolicLink `
+      -Path   (Join-Path $AgyConfig "rules\$($_.Name)") `
+      -Target $_.FullName
+}
 
 # Symlink each skill directory
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\skills") -Directory | ForEach-Object {
@@ -132,6 +138,26 @@ To expose `graphify-out/graph.json` as native MCP tools in Antigravity, add the 
 
 *(Alternatively, you can launch the stdio server via `python -m graphify.serve graphify-out/graph.json`.)*
 
+### 4. Installing `rtk` (Rust Token Killer)
+
+The [`rtk-token-hygiene.md`](.agent/rules/rtk-token-hygiene.md) rule expects [`rtk`](https://github.com/rtk-ai/rtk) to be installed on your `PATH` to compress CLI output:
+
+```powershell
+# Recommended on Windows via winget
+winget install rtk-ai.rtk
+
+# Alternative: install from GitHub via Cargo (do NOT run plain `cargo install rtk`)
+cargo install --git https://github.com/rtk-ai/rtk --branch master rtk
+```
+
+Verify installation and optionally register global agent hooks:
+
+```powershell
+rtk --version
+rtk gain
+rtk init -g
+```
+
 ---
 
 ## Versioning Policy
@@ -141,3 +167,7 @@ This repository follows [Semantic Versioning](https://semver.org/) tracked in [`
 - **`MAJOR`** — Breaking changes to repository layout, rule contracts, or skill interfaces.
 - **`MINOR`** — New skills, new rule sections, or backward-compatible workflow additions.
 - **`PATCH`** — Wording refinements, documentation updates, and bug fixes.
+
+## License
+
+Licensed under the [MIT License](LICENSE).

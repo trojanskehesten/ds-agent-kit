@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-11-24
+
+### Added
+- Global terminal token-hygiene rule (`.agent/rules/rtk-token-hygiene.md`) mandating `rtk` (Rust Token Killer) as a CLI proxy for supported commands with graceful fallback.
+- Installation and verification instructions for `rtk` on Windows in `README.md`.
+- MIT `LICENSE`.
+
+### Changed
+- Updated PowerShell global symlink instructions in `README.md` to link all `.agent/rules/*.md` files automatically.
+
 ## [1.0.0] - 2026-11-24
 
 ### Added
