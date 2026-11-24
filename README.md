@@ -9,6 +9,7 @@ ds-agent-kit/
 ├── .agent/
 │   ├── rules/
 │   │   ├── ds-standards.md
+│   │   ├── graphify-trigger.md
 │   │   └── rtk-token-hygiene.md
 │   └── skills/
 │       ├── data-exploration-analysis/
@@ -41,6 +42,7 @@ ds-agent-kit/
   - **Python & Modularity:** PEP 8, 120-character max line length, `uv` for environment management, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
   - **Data & Context Hygiene:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep `stdout` compact (`.head(3)`, never dumping raw tables).
 - **`rtk-token-hygiene.md`** — Mandates prefixing supported CLI commands (`git`, `pytest`, `ruff`, `ls`, `grep`, etc.) with `rtk` (Rust Token Killer) to compress terminal output by 60–90%, with explicit raw-output exceptions and graceful fallback when `rtk` is unavailable.
+- **`graphify-trigger.md`** — Lightweight trigger rule that activates the `graphify` skill automatically when `graphify-out/` exists or when exploring larger repositories (>30 files or 3+ code modules), and requires verifying graph findings in source files before editing.
 
 ### Skills
 
