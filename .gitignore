@@ -1,0 +1,37 @@
+# OS caches and metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
+._*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files, logs, and archives
+*.tmp
+*.bak
+*.log
+*.zip
+
+# Python and environment caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Jupyter local artifacts
+.ipynb_checkpoints/
+.jupyter_ystore.db
+.jupyter_ystore.db-*
+
+# Graphify and local knowledge graph artifacts
+graphify-out/
+.graphify/
+*.graph.json
