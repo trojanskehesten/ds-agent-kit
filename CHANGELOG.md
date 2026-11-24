@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-11-24
+
+### Added
+- Language-agnostic global rule `.agent/rules/general-standards.md` covering English artifacts, modular engineering habits, and compact diagnostic output across all project types.
+
+### Changed
+- Scoped `.agent/rules/ds-standards.md` strictly to Data Science, ML, Jupyter notebooks, and Python codebases/scripts so it does not interfere with non-Python/non-DS projects (e.g., Android).
+- Updated `README.md` to reflect the split rules and clarify that this is an opinionated personal kit.
+
 ## [1.3.1] - 2026-11-24
 
 ### Fixed

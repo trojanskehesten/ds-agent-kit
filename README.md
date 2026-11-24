@@ -1,6 +1,6 @@
 # ds-agent-kit
 
-Versioned collection of global rules, modular skills (`SKILL.md`), and reference guides for Data Science and codebase navigation. Built natively around the `.agent/` layout (Antigravity / Gemini-based agents) with portable Markdown rules and skills adaptable to other AI coding agents.
+Opinionated, versioned collection of personal rules, modular skills (`SKILL.md`), and reference guides for Data Science, Python, and codebase navigation. Built natively around the `.agent/` layout (Antigravity / Gemini-based agents) with portable Markdown rules and skills adaptable to other AI coding agents.
 
 ## Repository Structure
 
@@ -9,6 +9,7 @@ ds-agent-kit/
 ├── .agent/
 │   ├── rules/
 │   │   ├── ds-standards.md
+│   │   ├── general-standards.md
 │   │   ├── graphify-trigger.md
 │   │   └── rtk-token-hygiene.md
 │   └── skills/
@@ -40,10 +41,10 @@ ds-agent-kit/
 
 ### Global Rules
 
-- **`ds-standards.md`** — Baseline Data Science and Python engineering standards applied across projects:
-  - **Language Policy:** All code comments, docstrings, Markdown cells, chart labels, and analytical reports in English.
-  - **Python & Modularity:** PEP 8, 120-character max line length, `uv` for environment management, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
-  - **Data & Context Hygiene:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep `stdout` compact (`.head(3)`, never dumping raw tables).
+- **`general-standards.md`** — Universal baseline across all projects and languages: English-only code/docs/reports, modular code quality, concise evidence-based communication, compact `stdout`, and using the native domain persona/toolchain for non-DS projects.
+- **`ds-standards.md`** — Scoped **only** to Data Science, ML, Jupyter notebooks, and Python projects/scripts:
+  - **Role & Style:** Senior Data Scientist persona, PEP 8, type hints, 120-character max line length, `uv` for Python environments, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
+  - **Data & Reproducibility:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep DataFrame `stdout` compact (`.head(3)`, never dumping raw tables).
 - **`rtk-token-hygiene.md`** — Mandates prefixing supported CLI commands (`git`, `pytest`, `ruff`, `ls`, `grep`, etc.) with `rtk` (Rust Token Killer) to compress terminal output by 60–90%, with explicit raw-output exceptions and graceful fallback when `rtk` is unavailable.
 - **`graphify-trigger.md`** — Lightweight trigger rule that activates the `graphify` skill automatically when `graphify-out/` exists or when exploring larger repositories (>30 files or 3+ code modules), and requires verifying graph findings in source files before editing.
 
