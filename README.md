@@ -1,6 +1,6 @@
 # ds-agent-kit
 
-Versioned collection of global rules and modular skills for Data Science and codebase navigation in **Antigravity**.
+Agent-agnostic, versioned collection of global rules, modular skills, and reference guides for Data Science and codebase navigation across AI coding agents (compatible with Markdown rules and the `SKILL.md` standard).
 
 ## Repository Structure
 
@@ -25,6 +25,9 @@ ds-agent-kit/
 │           ├── SKILL.md
 │           └── references/
 │               └── report-template.md
+├── docs/
+│   ├── crit-prompting-en.md
+│   └── crit-prompting-ru.md
 ├── .gitignore
 ├── CHANGELOG.md
 ├── LICENSE
@@ -33,7 +36,7 @@ ds-agent-kit/
 └── install.ps1
 ```
 
-## Included Rules & Skills
+## Included Rules, Skills & Docs
 
 ### Global Rules
 
@@ -52,35 +55,46 @@ ds-agent-kit/
 | **`notebook-report-synthesis`** | Compiles completed analysis notebooks into a single executive-ready Markdown report with strict numerical traceability, `[UNVERIFIED]` flagging, and cross-notebook contradiction reconciliation. |
 | **`graphify`** | Standalone skill for building and querying structural knowledge graphs (`graphify-out/`) via the `graphify` CLI or MCP server to navigate unfamiliar codebases and trace dependencies without brute-force file reading. |
 
+### Reference Docs (`docs/`)
+
+Human-facing CRIT prompting cheat sheets ([EN](docs/crit-prompting-en.md) / [RU](docs/crit-prompting-ru.md)). Kept outside `.agent/` so agents do not auto-load them into context and `install.ps1` does not copy them into target projects.
+
 ---
 
 ## Installation
 
-### 1. Global Installation in Antigravity (Windows / PowerShell Symlinks)
+### 1. Global Installation (Windows / PowerShell Symlinks)
 
-Antigravity discovers global customizations under `$env:USERPROFILE\.gemini\config\`. Linking via symlinks keeps your global setup automatically in sync with this repository.
+Linking rules and skills via symlinks keeps your global agent configuration automatically in sync with this repository. Pick your client's global config directory:
+
+| Client | Global Config Directory | MCP Config File |
+| :--- | :--- | :--- |
+| **Antigravity / Gemini** | `~/.gemini/config/` | `~/.gemini/config/mcp_config.json` |
+| **Claude Code** | `~/.claude/` | `~/.claude.json` |
+| **Cursor** | `~/.cursor/` | `~/.cursor/mcp.json` |
+| **Codex CLI** | `~/.codex/` | `~/.codex/config.toml` |
 
 > **Note:** Creating symbolic links on Windows requires either **Developer Mode** enabled (`Settings -> System -> For developers`) or an **elevated (Administrator) PowerShell** session.
 
 ```powershell
-$KitRoot   = "C:\Users\forth\Documents\ds-agent-kit"
-$AgyConfig = Join-Path $env:USERPROFILE ".gemini\config"
+$KitRoot     = (Get-Location).Path
+$AgentConfig = Join-Path $env:USERPROFILE ".gemini\config"  # Adjust for your client from the table above
 
 # Ensure target directories exist
-New-Item -ItemType Directory -Path (Join-Path $AgyConfig "rules")  -Force | Out-Null
-New-Item -ItemType Directory -Path (Join-Path $AgyConfig "skills") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $AgentConfig "rules")  -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $AgentConfig "skills") -Force | Out-Null
 
 # Symlink all global rules
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\rules") -Filter "*.md" | ForEach-Object {
     New-Item -ItemType SymbolicLink `
-      -Path   (Join-Path $AgyConfig "rules\$($_.Name)") `
+      -Path   (Join-Path $AgentConfig "rules\$($_.Name)") `
       -Target $_.FullName
 }
 
 # Symlink each skill directory
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\skills") -Directory | ForEach-Object {
     New-Item -ItemType SymbolicLink `
-      -Path   (Join-Path $AgyConfig "skills\$($_.Name)") `
+      -Path   (Join-Path $AgentConfig "skills\$($_.Name)") `
       -Target $_.FullName
 }
 ```
@@ -122,7 +136,7 @@ graphify --help
 
 #### Connecting the Graphify MCP Server (Optional)
 
-To expose `graphify-out/graph.json` as native MCP tools in Antigravity, add the `graphify` entry from [`.agent/skills/graphify/mcp_config.example.json`](.agent/skills/graphify/mcp_config.example.json) to your global `~/.gemini/config/mcp_config.json`:
+To expose `graphify-out/graph.json` as native MCP tools, add the `graphify` entry from [`.agent/skills/graphify/mcp_config.example.json`](.agent/skills/graphify/mcp_config.example.json) to your client's MCP configuration file (see the table above):
 
 ```json
 {
@@ -173,3 +187,11 @@ This repository follows [Semantic Versioning](https://semver.org/) tracked in [`
 ## License
 
 Licensed under the [MIT License](LICENSE).
+
+## Credits & References
+
+- **CRIT Prompting Framework:** Geoff Woods (*The AI-Driven Leader*) and DataCamp (*"How to Do Agentic Data Analysis"*).
+- **Agentic DS Architecture (CodeAct & Skills pattern):** Roberto Rodriguez (NDC talk).
+- **`pltstat`:** <https://pypi.org/project/pltstat/>
+- **`graphify`:** <https://pypi.org/project/graphifyy/> ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify))
+- **`rtk` (Rust Token Killer):** <https://github.com/rtk-ai/rtk>

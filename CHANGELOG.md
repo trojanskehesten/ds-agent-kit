@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-11-24
+
+### Added
+- Human-facing CRIT prompting cheat sheets in `docs/crit-prompting-en.md` and `docs/crit-prompting-ru.md` (kept outside `.agent/` and excluded from `install.ps1`), including source references.
+- Multi-client global configuration path table and `Credits & References` section in `README.md`.
+
+### Changed
+- Made `README.md` agent-agnostic rather than tied to a single AI coding client.
+
 ## [1.2.1] - 2026-11-24
 
 ### Changed
