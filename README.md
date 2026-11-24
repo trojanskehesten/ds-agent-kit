@@ -1,6 +1,6 @@
 # ds-agent-kit
 
-Agent-agnostic, versioned collection of global rules, modular skills, and reference guides for Data Science and codebase navigation across AI coding agents (compatible with Markdown rules and the `SKILL.md` standard).
+Versioned collection of global rules, modular skills (`SKILL.md`), and reference guides for Data Science and codebase navigation. Built natively around the `.agent/` layout (Antigravity / Gemini-based agents) with portable Markdown rules and skills adaptable to other AI coding agents.
 
 ## Repository Structure
 
@@ -65,20 +65,22 @@ Human-facing CRIT prompting cheat sheets ([EN](docs/crit-prompting-en.md) / [RU]
 
 ### 1. Global Installation (Windows / PowerShell Symlinks)
 
-Linking rules and skills via symlinks keeps your global agent configuration automatically in sync with this repository. Pick your client's global config directory:
+The `.agent/rules/*.md` + `.agent/skills/` layout is natively discovered by **Antigravity** (`~/.gemini/config/`). Other AI coding agents use different rule/skill paths, so adapt the mapping to your client:
 
-| Client | Global Config Directory | MCP Config File |
-| :--- | :--- | :--- |
-| **Antigravity / Gemini** | `~/.gemini/config/` | `~/.gemini/config/mcp_config.json` |
-| **Claude Code** | `~/.claude/` | `~/.claude.json` |
-| **Cursor** | `~/.cursor/` | `~/.cursor/mcp.json` |
-| **Codex CLI** | `~/.codex/` | `~/.codex/config.toml` |
+| Client | Global Rules | Global Skills | MCP Config File |
+| :--- | :--- | :--- | :--- |
+| **Antigravity / Gemini** | `~/.gemini/config/rules/*.md` | `~/.gemini/config/skills/` | `~/.gemini/config/mcp_config.json` |
+| **Claude Code** | `~/.claude/CLAUDE.md` *(include/merge)* | `~/.claude/skills/` | `~/.claude.json` |
+| **Cursor** | User Rules *(UI)* / project `.cursor/rules/*.mdc` | Project / custom docs | `~/.cursor/mcp.json` |
+| **Codex CLI** | `~/.codex/AGENTS.md` *(include/merge)* | `~/.codex/skills/` | `~/.codex/config.toml` |
 
 > **Note:** Creating symbolic links on Windows requires either **Developer Mode** enabled (`Settings -> System -> For developers`) or an **elevated (Administrator) PowerShell** session.
 
+Example PowerShell symlink setup for **Antigravity / Gemini** (`~/.gemini/config/`):
+
 ```powershell
 $KitRoot     = (Get-Location).Path
-$AgentConfig = Join-Path $env:USERPROFILE ".gemini\config"  # Adjust for your client from the table above
+$AgentConfig = Join-Path $env:USERPROFILE ".gemini\config"
 
 # Ensure target directories exist
 New-Item -ItemType Directory -Path (Join-Path $AgentConfig "rules")  -Force | Out-Null
@@ -101,7 +103,7 @@ Get-ChildItem -Path (Join-Path $KitRoot ".agent\skills") -Directory | ForEach-Ob
 
 ### 2. Local Installation into a Project
 
-Use `install.ps1` to copy `.agent/` into a specific project workspace. The script prints the version from `VERSION` and warns before overwriting any existing files:
+On Windows (PowerShell), use `install.ps1` to copy `.agent/` into a specific project workspace. The script prints the version from `VERSION` and warns before overwriting any existing files *(on macOS/Linux, copy `.agent/` directly with `cp -r .agent /path/to/your-project/`)*.
 
 ```powershell
 .\install.ps1 -TargetProject "C:\path\to\your-project"

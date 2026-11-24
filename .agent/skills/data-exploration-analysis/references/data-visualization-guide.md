@@ -16,7 +16,8 @@ Example format:
 - n_total: 1240 (missing_dropped: 12)
 - group_A (n=610): median=14.2, IQR=[11.0, 18.5], mean=15.1, outliers(>1.5*IQR)=8
 - group_B (n=618): median=16.8, IQR=[13.4, 20.1], mean=17.0, outliers(>1.5*IQR)=3
-- diff_B_vs_A: +2.6 median (+18.3%), Mann-Whitney p=0.0014
+- median_diff_B_vs_A: +2.6 (+18.3%)
+- Mann-Whitney U: p=0.0014, rank-biserial r=0.14 (stochastic dominance; tests median equality only under equal-shape assumption)
 ```
 
 ## 3. Diagnostic Zoom-In for Suspicious Regions

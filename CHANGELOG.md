@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-11-24
+
+### Fixed
+- Corrected multiple-testing guidance in `.agent/skills/data-exploration-analysis/references/data-analysis-techniques.md`: reserve Bonferroni for cases where $m$ is fixed in advance and adjusted p-values are needed before remaining p-values are computed; use Holm (FWER) or Benjamini-Hochberg (FDR) once all p-values are available.
+- Fixed `[AI_SUMMARY]` example in `.agent/skills/data-exploration-analysis/references/data-visualization-guide.md` to separate descriptive median difference from Mann-Whitney U (stochastic dominance + rank-biserial `r`).
+- Clarified client-specific rule/skill paths and `.agent/` native compatibility in `README.md` (removed overstated "agent-agnostic" framing and noted macOS/Linux `cp -r` fallback alongside `install.ps1`).
+
 ## [1.3.0] - 2026-11-24
 
 ### Added

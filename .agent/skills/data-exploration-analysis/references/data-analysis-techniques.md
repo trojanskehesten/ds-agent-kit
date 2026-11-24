@@ -14,8 +14,8 @@
 - Choose tests matching data properties (e.g., Mann-Whitney / permutation tests for skewed data; Welch's t-test over Student's t-test by default).
 - Never rely on p-values alone: always report **sample size (`n`)**, **effect size**, and **confidence intervals**.
 - **Multiple-testing corrections:**
-  - If the total number of tests ($m$) is known and fixed *before* computing p-values, apply **Bonferroni**.
-  - Otherwise, choose based on the error-rate target: **Holm** (or Bonferroni) for **FWER**, or **Benjamini-Hochberg** for **FDR**.
+  - If the total number of tests ($m$) is known and fixed in advance **and** an adjusted p-value (or threshold $\alpha / m$) is needed *before* the remaining p-values are computed, apply **Bonferroni**.
+  - Otherwise, once all p-values are available, choose based on the error-rate target: **Holm** for **FWER** (uniformly at least as powerful as Bonferroni), or **Benjamini-Hochberg** for **FDR**.
   - **Gatekeeping:** Use a Gatekeeping strategy whenever hypotheses have a clear hierarchy (e.g., primary → secondary endpoints); for unstructured exploratory screening, use Holm (FWER) or Benjamini-Hochberg (FDR).
 
 ## 4. Bias & Confounders
