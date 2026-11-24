@@ -10,4 +10,6 @@ Use **`rtk`** (Rust Token Killer) as a mandatory CLI proxy for terminal commands
   - **Files & Search:** `rtk ls`, `rtk find`, `rtk grep`, `rtk rg`
   - **Containers & Packages:** `rtk docker`, `rtk pip`
 - **Explicit Exceptions:** Run the raw command without `rtk` only when uncompressed output is strictly required (e.g., piping machine-readable JSON/CSV to another tool or inspecting exact byte-level diffs).
-- **Graceful Fallback:** If `rtk` is not installed in the current environment or rejects a specific subcommand/flag, fall back to the raw command immediately without retrying in a loop, and note that `rtk` was unavailable.
+- **Graceful Fallback:**
+  - If `rtk` is **not installed** in the current environment, fall back to the raw command immediately so the task is not blocked, explicitly report in chat that `rtk` is missing, and ask the user (once per session) whether they would like to install it (e.g., `winget install rtk-ai.rtk`).
+  - If `rtk` is installed but rejects a specific subcommand or flag, fall back to the raw command immediately without retrying in a loop and briefly note the issue.
