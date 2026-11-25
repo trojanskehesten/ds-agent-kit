@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-11-25
+
+### Changed
+- Specified `pltstat >= 0.11` as the minimum version for Plotly backend support in `.agent/skills/data-exploration-analysis/SKILL.md` and `references/data-visualization-guide.md`, with fallback to plain Plotly (or matplotlib/seaborn) when an older version is installed.
+
 ## [1.4.0] - 2026-11-24
 
 ### Added

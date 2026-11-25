@@ -1,7 +1,7 @@
 # Data Visualization Guide
 
 ## 1. Library Policy
-- **Statistical plots & test results (Primary):** Use **`pltstat`** (`https://pypi.org/project/pltstat/`) with the **Plotly** backend enabled by default to plot distributions, comparisons, and annotated statistical results. If unsure about exact `pltstat` function signatures, inspect `dir(pltstat)` / `help(...)` before calling rather than guessing arguments.
+- **Statistical plots & test results (Primary):** Use **`pltstat` (`>= 0.11`)** (`https://pypi.org/project/pltstat/`) with the **Plotly** backend enabled by default to plot distributions, comparisons, and annotated statistical results. Verify the installed version first (`pltstat.__version__`): Plotly backend support requires **`pltstat >= 0.11`**; if the environment has an older version (or lacks `pltstat`), write the chart directly in plain **Plotly** (or fall back to **matplotlib / seaborn** as below). If unsure about exact `pltstat` function signatures, inspect `dir(pltstat)` / `help(...)` before calling rather than guessing arguments.
 - **Custom interactive charts:** Use **Plotly** (`plotly.express` / `plotly.graph_objects`).
 - **Fallback:** Use **matplotlib / seaborn** only when `pltstat`/Plotly is overly complex, slow on very dense data, or for quick internal diagnostics.
 

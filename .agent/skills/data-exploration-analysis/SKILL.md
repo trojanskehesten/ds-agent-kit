@@ -71,7 +71,7 @@ Consult `references/data-analysis-techniques.md`.
 
 Build clear, publication-ready charts backed by exact numbers.
 
-- **Primary tools:** Use **`pltstat`** (configured with the **Plotly** backend by default) for statistical visualizations and displaying test/analysis results. Use plain **Plotly** for custom interactive charts, and fall back to **matplotlib/seaborn** only when Plotly/`pltstat` is overly complex or unsuitable.
+- **Primary tools:** Use **`pltstat` (`>= 0.11`)** configured with the **Plotly** backend by default for statistical visualizations and displaying test/analysis results. If `pltstat < 0.11` (or unavailable), fall back to plain **Plotly** for custom interactive charts, and use **matplotlib/seaborn** only when Plotly/`pltstat` is overly complex or unsuitable.
 - **Mandatory `[AI_SUMMARY]`:** For every plot, print a compact `[AI_SUMMARY]` block to `stdout` with exact underlying metrics (quantiles, `n`, outliers, bin frequencies for histograms, correlations, group stats). Base all written conclusions strictly on these numbers, never by guessing from rendered images.
 
 Consult `references/data-visualization-guide.md`.
