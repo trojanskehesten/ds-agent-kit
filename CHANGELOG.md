@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2026-11-25
+
+### Fixed
+- Replaced hardcoded `.agent/skills/graphify/SKILL.md` path in `.agent/rules/graphify-trigger.md` with skill-name reference for global/multi-client portability.
+- Instructed the `graphify` skill to add `graphify-out/` to the target repository's `.gitignore` if missing.
+- Made the PowerShell global symlink snippet in `README.md` idempotent (`-Force`) and clarified that `rtk init -g` hooks are optional alongside `rtk-token-hygiene.md`.
+- Prevented `install.ps1` from hanging on `Read-Host` in non-interactive sessions by failing cleanly with an instruction to pass `-Force`.
+
 ## [1.4.1] - 2026-11-25
 
 ### Changed

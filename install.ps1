@@ -72,6 +72,11 @@ if ($Conflicts.Count -gt 0 -and -not $Force) {
         Write-Host "  - .agent\$Item" -ForegroundColor Yellow
     }
 
+    if (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected) {
+        Write-Error "Existing files detected in non-interactive mode. Re-run with -Force to overwrite."
+        exit 1
+    }
+
     $Response = Read-Host "Overwrite existing files? [y/N]"
     if ($Response -notin @("y", "Y", "yes", "YES")) {
         Write-Host "Installation cancelled. No files were modified." -ForegroundColor Yellow

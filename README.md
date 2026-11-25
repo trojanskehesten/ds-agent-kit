@@ -87,18 +87,18 @@ $AgentConfig = Join-Path $env:USERPROFILE ".gemini\config"
 New-Item -ItemType Directory -Path (Join-Path $AgentConfig "rules")  -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $AgentConfig "skills") -Force | Out-Null
 
-# Symlink all global rules
+# Symlink all global rules (idempotent: -Force updates existing links)
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\rules") -Filter "*.md" | ForEach-Object {
-    New-Item -ItemType SymbolicLink `
+    New-Item -ItemType SymbolicLink -Force `
       -Path   (Join-Path $AgentConfig "rules\$($_.Name)") `
-      -Target $_.FullName
+      -Target $_.FullName | Out-Null
 }
 
 # Symlink each skill directory
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\skills") -Directory | ForEach-Object {
-    New-Item -ItemType SymbolicLink `
+    New-Item -ItemType SymbolicLink -Force `
       -Path   (Join-Path $AgentConfig "skills\$($_.Name)") `
-      -Target $_.FullName
+      -Target $_.FullName | Out-Null
 }
 ```
 
@@ -169,7 +169,7 @@ winget install rtk-ai.rtk
 cargo install --git https://github.com/rtk-ai/rtk --branch master rtk
 ```
 
-Verify installation and optionally register global agent hooks:
+Verify installation, and optionally register global agent hooks (hooks auto-rewrite commands and are optional — `rtk-token-hygiene.md` works without them):
 
 ```powershell
 rtk --version

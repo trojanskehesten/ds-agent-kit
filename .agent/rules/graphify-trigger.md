@@ -1,6 +1,6 @@
 # Codebase Navigation Trigger (Graphify)
 
-Use the `graphify` skill proactively on non-trivial repositories to avoid brute-force file reading and save context tokens. Defer all CLI/MCP workflow details to `.agent/skills/graphify/SKILL.md`.
+Use the `graphify` skill proactively on non-trivial repositories to avoid brute-force file reading and save context tokens. Defer all CLI/MCP workflow details to the `graphify` skill.
 
 ## Trigger Conditions
 

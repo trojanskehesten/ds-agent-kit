@@ -14,7 +14,7 @@ Use the `graphify` CLI (package `graphifyy`) or its MCP server to inspect reposi
 - **Graph First, Raw Files Second:** When a repository has `graphify-out/`, consult `GRAPH_REPORT.md` and query `graph.json` before scanning raw source files.
 - **Check Before Rebuilding:** Reuse an existing `graphify-out/graph.json` if it is up to date. Rebuild only when missing or when significant structural changes occurred.
 - **Distinguish Edge Confidence:** Treat AST-derived `EXTRACTED` edges as deterministic facts and semantic `INFERRED` edges as hypotheses to verify directly in source code.
-- **Keep Artifacts Local:** Never commit `graphify-out/` or generated graph files into version control.
+- **Keep Artifacts Local:** Never commit `graphify-out/` or generated graph files into version control — add `graphify-out/` to the target repository's `.gitignore` if missing.
 
 ## Workflow
 
