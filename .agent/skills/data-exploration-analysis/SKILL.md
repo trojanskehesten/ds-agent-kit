@@ -12,6 +12,7 @@ Follow the global standards in `ds-standards.md` and execute this structured wor
 ## Workflow Rules
 
 - Complete each step in order. Do NOT skip directly to modeling, conclusions, or visualizations before auditing the raw data.
+- **Live Notebook Execution:** Operate on `.ipynb` cells via available notebook tools (native IDE notebook tools or Jupyter MCP) rather than editing raw `.ipynb` JSON as text; if cell-less kernel execution (`execute_code`) exists, keep it strictly read-only so the notebook remains reproducible top-to-bottom.
 - **Progressive References:** Read files under `references/` ONLY when the current step calls for them. Do NOT load all reference files upfront.
 
 ---

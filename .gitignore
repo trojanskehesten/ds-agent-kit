@@ -28,8 +28,8 @@ venv/
 
 # Jupyter local artifacts
 .ipynb_checkpoints/
-.jupyter_ystore.db
-.jupyter_ystore.db-*
+.jupyter_ystore.db*
+.jupyter/
 
 # Graphify and local knowledge graph artifacts
 graphify-out/

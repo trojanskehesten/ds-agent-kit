@@ -47,6 +47,7 @@ ds-agent-kit/
 - **`ds-standards.md`** — Scoped **only** to Data Science, ML, Jupyter notebooks, and Python projects/scripts:
   - **Role & Style:** Senior Data Scientist persona, PEP 8, type hints, 120-character max line length, `uv` for Python environments, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
   - **Data & Reproducibility:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep DataFrame `stdout` compact (`.head(3)`, never dumping raw tables).
+  - **Notebook Tooling & Hygiene:** Prioritize native IDE notebook tools or Jupyter MCP over raw `.ipynb` JSON edits, keep cell-less `execute_code` strictly read-only, use token-safe offline `.ipynb` text extraction when no server is running, and keep `.jupyter_ystore.db*` / `.jupyter/` out of Git.
 - **`rtk-token-hygiene.md`** — Mandates prefixing supported CLI commands (`git`, `pytest`, `ruff`, `ls`, `grep`, etc.) with `rtk` (Rust Token Killer) to compress terminal output by 60–90%, with explicit raw-output exceptions and graceful fallback when `rtk` is unavailable.
 - **`graphify-trigger.md`** — Lightweight trigger rule that activates the `graphify` skill automatically when `graphify-out/` exists or when exploring larger repositories (>30 files or 3+ code modules), and requires verifying graph findings in source files before editing.
 

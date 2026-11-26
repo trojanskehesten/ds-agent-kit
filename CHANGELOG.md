@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-11-26
+
+### Added
+- `Jupyter Notebook Tooling & Hygiene` section in `.agent/rules/ds-standards.md` defining a portable tool priority (native IDE notebook tools / Jupyter MCP over raw `.ipynb` JSON), read-only discipline for cell-less `execute_code`, token-safe offline `.ipynb` inspection, and `.gitignore` hygiene for `jupyter-collaboration` artifacts.
+- Standalone `Live Notebook Execution` reminder in `.agent/skills/data-exploration-analysis/SKILL.md` and `Token-Safe .ipynb Reading` guidance in `.agent/skills/notebook-report-synthesis/SKILL.md` to prevent dumping `base64`/Plotly JSON blobs into context when reading notebooks offline.
+
+### Changed
+- Added `.jupyter/` and `.jupyter_ystore.db*` to `.gitignore` and updated `README.md` to reflect the new `ds-standards.md` notebook tooling rules.
+
 ## [1.4.4] - 2026-11-26
 
 ### Added

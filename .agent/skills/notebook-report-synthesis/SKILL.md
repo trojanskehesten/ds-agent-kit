@@ -32,6 +32,8 @@ Complete each step in order.
 ---
 
 ### Step 2: Extract Structured Evidence
+- **Token-Safe `.ipynb` Reading:** Read `.ipynb` notebooks via dedicated notebook tools (native IDE notebook readers or Jupyter MCP `read_notebook` / `read_cell`) when available; otherwise, extract cell sources and plain-text outputs (`stdout` / `text/plain`) via a lightweight Python snippet (`json`/`nbformat`) that strips `image/*`, `text/html`, and `application/vnd.plotly*` blobs — never dump raw `.ipynb` JSON into context.
+
 For each notebook, extract:
 - Objective and dataset scope (tables, date ranges, `n`, filters applied).
 - Data quality issues, manual fixes, exclusions, and assumptions.
