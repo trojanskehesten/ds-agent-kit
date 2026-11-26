@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.4] - 2026-11-26
+
+### Added
+- Human-facing Jupyter MCP setup guides in `docs/jupyter-mcp-setup-en.md` and `docs/jupyter-mcp-setup-ru.md` covering live kernel integration for JupyterLab and VS Code via `jupyter-mcp-server` and `jupyter-collaboration` (plus `jupytext` trade-offs), linked from `README.md`.
+
 ## [1.4.3] - 2026-11-25
 
 ### Changed

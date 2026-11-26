@@ -28,7 +28,9 @@ ds-agent-kit/
 │               └── report-template.md
 ├── docs/
 │   ├── crit-prompting-en.md
-│   └── crit-prompting-ru.md
+│   ├── crit-prompting-ru.md
+│   ├── jupyter-mcp-setup-en.md
+│   └── jupyter-mcp-setup-ru.md
 ├── .gitignore
 ├── CHANGELOG.md
 ├── LICENSE
@@ -58,7 +60,10 @@ ds-agent-kit/
 
 ### Reference Docs (`docs/`)
 
-Human-facing CRIT prompting cheat sheets ([EN](docs/crit-prompting-en.md) / [RU](docs/crit-prompting-ru.md)). Kept outside `.agent/` so agents do not auto-load them into context and `install.ps1` does not copy them into target projects.
+Human-facing guides kept outside `.agent/` so agents do not auto-load them into context and `install.ps1` does not copy them into target projects:
+
+- **CRIT Prompting Cheat Sheet** ([EN](docs/crit-prompting-en.md) / [RU](docs/crit-prompting-ru.md)) — Meta-layer hypothesis discovery and structured CRIT prompting templates for agentic EDA.
+- **Jupyter MCP Setup Guide** ([EN](docs/jupyter-mcp-setup-en.md) / [RU](docs/jupyter-mcp-setup-ru.md)) — Connecting AI coding agents to live JupyterLab and VS Code notebook kernels via `jupyter-mcp-server` and `jupyter-collaboration` (plus `jupytext` trade-offs).
 
 ---
 
