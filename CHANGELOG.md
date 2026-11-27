@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-11-27
+
+### Added
+- **Cell Granularity & Notebook Top-Level Structure** rules in `.agent/rules/ds-standards.md`: one cell = one logical step (~10–25 lines, even in single-file notebooks), all `import`s (plus `%autoreload 2` for local modules) in Cell 1, centralized `UPPER_SNAKE_CASE` config/constants in Cell 2, and linear top-to-bottom state hygiene.
+- **Strict Chapter / Step Approval Gate** in `.agent/skills/data-exploration-analysis/SKILL.md`: stopping after completing or revising a chapter and requiring explicit user confirmation before advancing (revisions to the current chapter do not count as approval to start the next one).
+- Collapsible **dual-MIME `show_ai_summary` helper** pattern (`text/html` `<details>` + `text/plain`) in `.agent/skills/data-exploration-analysis/references/data-visualization-guide.md` so notebooks remain visually clean for humans while preserving plain-text `[AI_SUMMARY]` blocks for agents and offline extractors.
+
+### Changed
+- Updated `.agent/skills/data-exploration-analysis/SKILL.md`, `.agent/skills/notebook-report-synthesis/SKILL.md`, and `README.md` to reflect dual-MIME `[AI_SUMMARY]` outputs and the new notebook structure standards.
+
 ## [1.6.0] - 2026-11-27
 
 ### Added

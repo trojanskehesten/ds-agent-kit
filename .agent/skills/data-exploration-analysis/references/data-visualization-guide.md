@@ -7,7 +7,29 @@
 
 ## 2. Mandatory `[AI_SUMMARY]` Format
 - Do NOT interpret charts visually or guess values from rendered images.
-- Every visualization cell MUST print a compact, structured `[AI_SUMMARY]` block to `stdout` computed directly from the plotted DataFrame.
+- Every visualization cell MUST emit a compact, structured `[AI_SUMMARY]` block computed directly from the plotted DataFrame.
+- **Collapsible Dual-MIME Helper (Recommended):** Printing raw `[AI_SUMMARY]` blocks directly to `stdout` can clutter notebook reading for humans. Prefer a shared helper in `utils/nb_helpers.py` that emits **both** `text/html` (a collapsed `<details>` toggle for JupyterLab / VS Code readers) **and** `text/plain` (exact plain text preserved even when `text/html` is stripped during offline `.ipynb` extraction or report synthesis):
+
+```python
+import html as _html
+from IPython.display import display
+
+
+def show_ai_summary(plot_id: str, lines: list[str]) -> None:
+    """Render a collapsible [AI_SUMMARY] in Jupyter while keeping plain text for agents."""
+    body = f"[AI_SUMMARY | plot_id: {plot_id}]\n" + "\n".join(lines)
+    markup = (
+        "<details style='margin-top:6px;font-family:monospace;font-size:12px;'>"
+        f"<summary style='cursor:pointer;font-weight:bold;color:#333;'>"
+        f"[AI_SUMMARY | {_html.escape(plot_id)}]</summary>"
+        f"<pre style='background:#f6f8fa;padding:8px;border-radius:4px;margin-top:4px;'>"
+        f"{_html.escape(body)}</pre>"
+        "</details>"
+    )
+    display({"text/html": markup, "text/plain": body}, raw=True)
+```
+
+*(Note: Never use plain `display(HTML(...))` without a `text/plain` entry, because its fallback `text/plain` is `<IPython.core.display.HTML object>`, which hides all metrics from text-only extractors. If a project strictly forbids helper `.py` files, either define `show_ai_summary` in the top setup cell or fall back to `print()`.)*
 - **Histograms & distributions:** In addition to summary stats (median, IQR, mean, skew, outliers), include a compact **bin frequency table (5–10 appropriately sized bins with edges and count/%)** or key percentiles (`P5, P25, P50, P75, P95`) so intermediate distribution differences, gaps, and local peaks are visible.
 
 Example format:

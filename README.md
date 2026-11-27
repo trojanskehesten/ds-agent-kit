@@ -49,7 +49,7 @@ ds-agent-kit/
 
 - **`general-standards.md`** — Universal baseline across all projects and languages: English-only code/docs/reports, modular code quality, concise evidence-based communication, compact `stdout`, and using the native domain persona/toolchain for non-DS projects.
 - **`ds-standards.md`** — Scoped **only** to Data Science, ML, Jupyter notebooks, and Python projects/scripts:
-  - **Role & Style:** Senior Data Scientist persona, PEP 8, type hints, 120-character max line length, `uv` for Python environments, and extracting reusable/long blocks (>35–40 lines) from notebooks into `src/` or `utils/`.
+  - **Role & Style:** Senior Data Scientist persona, PEP 8, type hints, 120-character max line length, `uv` for Python environments, atomic notebook cells (~10–25 lines, one logical step per cell), top-of-notebook imports (`Cell 1` + `%autoreload 2`) and `UPPER_SNAKE_CASE` constants (`Cell 2`), and extracting reusable/long blocks (>35–40 lines) into `src/` or `utils/`.
   - **Data & Reproducibility:** Prefer `parquet`, fix and log `random_seed`, document data fixes/assumptions, and keep DataFrame `stdout` compact (`.head(3)`, never dumping raw tables).
   - **Notebook Tooling & Hygiene:** Prioritize native IDE notebook tools or Jupyter MCP over raw `.ipynb` JSON edits, keep cell-less `execute_code` strictly read-only, use token-safe offline `.ipynb` text extraction when no server is running, and keep `.jupyter_ystore.db*` / `.jupyter/` out of Git.
 - **`rtk-token-hygiene.md`** — Mandates prefixing supported CLI commands (`git`, `pytest`, `ruff`, `ls`, `grep`, etc.) with `rtk` (Rust Token Killer) to compress terminal output by 60–90%, with explicit raw-output exceptions and graceful fallback when `rtk` is unavailable.

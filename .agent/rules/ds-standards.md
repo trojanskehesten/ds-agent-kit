@@ -8,6 +8,11 @@ Act as a Senior Data Scientist (10+ years of experience) with strong Python soft
 - **Code Style:** Follow PEP 8 and clean Python practices (type hints, concise docstrings, pure functions where possible).
 - **Line Length:** Enforce a strict **maximum line length of 120 characters** in all `.py` files.
 - **Notebook vs. Scripts:** Keep Jupyter notebooks focused on narrative, exploration, and results. Extract large code blocks (>35–40 lines) and any reusable logic (data loaders, cleaning pipelines, statistical helpers, plotting wrappers) into `.py` modules under `src/` or `utils/`, and import them using `%load_ext autoreload` / `%autoreload 2`.
+- **Cell Granularity:** Follow **one cell = one logical step** (target ~10–25 lines per code cell: one check, one table, or one chart per cell, separated by brief Markdown subheadings). Even if the user explicitly requests a single self-contained notebook with no external `.py` scripts, split code into small, focused cells rather than 50+ line monoliths.
+- **Notebook Top-Level Structure:**
+  - **Cell 1 (Imports):** Place ALL `import` statements in the first code cell (together with `%load_ext autoreload` / `%autoreload 2` whenever importing local `.py` modules). Never scatter `import` statements inside mid-notebook cells — if a new library is needed later, add it to Cell 1 and re-run it.
+  - **Cell 2 (Config & Constants):** Centralize file paths, `RANDOM_SEED`, plotting theme/backend settings, significance thresholds, and domain constants in `UPPER_SNAKE_CASE` (e.g., `DATA_PATH`, `RANDOM_SEED = 42`, `ALPHA = 0.05`) instead of burying magic numbers in analysis cells.
+  - **Linear State:** Keep execution strictly linear top-to-bottom; avoid mutating shared DataFrames in-place across non-adjacent cells so `Restart & Run All` is deterministic.
 - **Environment:** Use **`uv`** for Python dependency and virtual environment management (`uv run`, `uv add`).
 
 ## Data, Reproducibility & DataFrame Hygiene

@@ -12,6 +12,7 @@ Follow the global standards in `ds-standards.md` and execute this structured wor
 ## Workflow Rules
 
 - Complete each step in order. Do NOT skip directly to modeling, conclusions, or visualizations before auditing the raw data.
+- **Strict Chapter / Step Approval Gate:** When working chapter-by-chapter or step-by-step, after completing a chapter — **and after applying any requested fixes or revisions to the current chapter** — STOP and wait for explicit user approval to move on (e.g., *"looks good, proceed to Chapter N+1"*). Feedback, questions, or revision requests on the current chapter are **NOT** permission to start the next chapter.
 - **Live Notebook Execution:** Operate on `.ipynb` cells via available notebook tools (native IDE notebook tools or Jupyter MCP) rather than editing raw `.ipynb` JSON as text; if cell-less kernel execution (`execute_code`) exists, keep it strictly read-only so the notebook remains reproducible top-to-bottom.
 - **Progressive References:** Read files under `references/` ONLY when the current step calls for them. Do NOT load all reference files upfront.
 
@@ -73,7 +74,7 @@ Consult `references/data-analysis-techniques.md`.
 Build clear, publication-ready charts backed by exact numbers.
 
 - **Primary tools:** Use **`pltstat` (`>= 0.11`)** configured with the **Plotly** backend by default for statistical visualizations and displaying test/analysis results. If `pltstat < 0.11` (or unavailable), fall back to plain **Plotly** for custom interactive charts, and use **matplotlib/seaborn** only when Plotly/`pltstat` is overly complex or unsuitable.
-- **Mandatory `[AI_SUMMARY]`:** For every plot, print a compact `[AI_SUMMARY]` block to `stdout` with exact underlying metrics (quantiles, `n`, outliers, bin frequencies for histograms, correlations, group stats). Base all written conclusions strictly on these numbers, never by guessing from rendered images.
+- **Mandatory `[AI_SUMMARY]`:** For every plot, emit a compact `[AI_SUMMARY]` block with exact underlying metrics (quantiles, `n`, outliers, bin frequencies for histograms, correlations, group stats). Prefer a collapsible dual-MIME helper (e.g., `show_ai_summary` in `utils/nb_helpers.py` — see `references/data-visualization-guide.md`) so the notebook stays clean for human readers while preserving `text/plain` output for agents; fall back to `print()` in minimal single-file notebooks. Base all written conclusions strictly on these numbers, never by guessing from rendered images.
 
 Consult `references/data-visualization-guide.md`.
 
