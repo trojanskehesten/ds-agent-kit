@@ -31,6 +31,10 @@ ds-agent-kit/
 │   ├── crit-prompting-ru.md
 │   ├── jupyter-mcp-setup-en.md
 │   └── jupyter-mcp-setup-ru.md
+├── extras/
+│   └── skills/
+│       └── crit-prompt-refiner/
+│           └── SKILL.md
 ├── .gitignore
 ├── CHANGELOG.md
 ├── LICENSE
@@ -58,6 +62,14 @@ ds-agent-kit/
 | **`data-exploration-analysis`** | Structured 6-step workflow for rigorous EDA and hypothesis testing in Jupyter notebooks, with progressive reference guides for querying, statistical rigor, and `pltstat`/Plotly visualizations backed by mandatory `[AI_SUMMARY]` blocks. |
 | **`notebook-report-synthesis`** | Compiles completed analysis notebooks into a single executive-ready Markdown report with strict numerical traceability, `[UNVERIFIED]` flagging, and cross-notebook contradiction reconciliation. |
 | **`graphify`** | Standalone skill for building and querying structural knowledge graphs (`graphify-out/`) via the `graphify` CLI or MCP server to navigate unfamiliar codebases and trace dependencies without brute-force file reading. |
+
+### Optional / Chat Skills (`extras/skills/`)
+
+Prompting and chat-level utility skills kept outside `.agent/` so `install.ps1` does not copy them into target coding/DS repositories. Install them globally (`~/.gemini/config/skills/`) or upload to Gemini web chat as needed:
+
+| Skill | Purpose |
+| :--- | :--- |
+| **`crit-prompt-refiner`** | Audits and refines CRIT prompt drafts (`Context`, `Role`, `Interview`, `Task`) for execution-order conflicts, template artifacts, and dialogue-language policy before sending them to an AI agent. Triggered via `/crit` or `/crit-prompt-refiner`. |
 
 ### Reference Docs (`docs/`)
 
@@ -102,6 +114,13 @@ Get-ChildItem -Path (Join-Path $KitRoot ".agent\rules") -Filter "*.md" | ForEach
 
 # Symlink each skill directory
 Get-ChildItem -Path (Join-Path $KitRoot ".agent\skills") -Directory | ForEach-Object {
+    New-Item -ItemType SymbolicLink -Force `
+      -Path   (Join-Path $AgentConfig "skills\$($_.Name)") `
+      -Target $_.FullName | Out-Null
+}
+
+# Optional: symlink chat/prompting utility skills from extras/skills/
+Get-ChildItem -Path (Join-Path $KitRoot "extras\skills") -Directory | ForEach-Object {
     New-Item -ItemType SymbolicLink -Force `
       -Path   (Join-Path $AgentConfig "skills\$($_.Name)") `
       -Target $_.FullName | Out-Null
